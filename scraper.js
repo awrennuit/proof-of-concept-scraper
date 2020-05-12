@@ -13,7 +13,6 @@ const customHeaderRequest = request.defaults({
 
 customHeaderRequest.get(listUrl, (error, response, body) => {
     if(!error && response.statusCode === 200) {
-      console.log('in there');
       const $ = cheerio.load(body);
       $(`.sortable`).each((i, el) => {
         if(2020 - i === 1999) {
