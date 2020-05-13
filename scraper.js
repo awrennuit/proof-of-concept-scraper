@@ -7,21 +7,6 @@ const customHeaderRequest = request.defaults({
   headers: {'User-Agent': `Mozilla/5.0 (Macintosh; Intel Mac OS X x.y; rv:42.0) Gecko/20100101 Firefox/42.0`}
 });
 
-// customHeaderRequest.get(listUrl, (error, response, body) => {
-//     if(!error && response.statusCode === 200) {
-//       const $ = cheerio.load(body);
-//       $(`.sortable tr td`).each((i, el) => {
-//         if(2020 - i === 1999) {
-//           return;
-//         }
-//         console.log(2020-i);
-//         console.log('el:', $(el).text());
-//         // const info = $(el).find(`td`);
-//         // console.log(info.text());
-//       });
-//     }
-// });
-
 customHeaderRequest.get(listUrl, (error, response, body) => {
   if(!error && response.statusCode === 200) {
     const $ = cheerio.load(body);
