@@ -7,7 +7,7 @@ const customHeaderRequest = request.defaults({
   headers: {'User-Agent': `Mozilla/5.0 (Macintosh; Intel Mac OS X x.y; rv:42.0) Gecko/20100101 Firefox/42.0`}
 });
 
-let topBillionairesPerYear = [];
+let topBillionairesPerYear = {};
 
 customHeaderRequest.get(listUrl, (error, response, body) => {
   if(!error && response.statusCode === 200) {
@@ -20,10 +20,8 @@ customHeaderRequest.get(listUrl, (error, response, body) => {
       }
       if(+$(el).text() <= 10) {
         if(+$(el).text() === 1) {
-          if(runningBillionaireList.length !== 0) {
-            topBillionairesPerYear.push({
-              [year + 1]: runningBillionaireList
-            });
+          if(runningBillionaireList.length === 10) { // 2003 & 2001 have 11 in list 
+            topBillionairesPerYear[year + 1] = runningBillionaireList;
             runningBillionaireList = [];
           }
           year--;
@@ -36,12 +34,14 @@ customHeaderRequest.get(listUrl, (error, response, body) => {
           country: $(el).next().next().next().next().text().trim(),
           business: $(el).next().next().next().next().next().text().trim()
         });
-        // console.log('running list:', runningBillionaireList);
       }
       else {
         return;
       }
+      console.log('running list:', runningBillionaireList);
     });
   }
-  // console.log('billionaires:', topBillionairesPerYear);
+  console.log('billionaires:', topBillionairesPerYear);
+  // console.log('year[2020]:', topBillionairesPerYear['2020']);
+  // console.log('year[2020][0]:', topBillionairesPerYear['2020'][0]);
 });
