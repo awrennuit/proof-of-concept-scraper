@@ -20,7 +20,7 @@ customHeaderRequest.get(listUrl, (error, response, body) => {
       }
       if(+$(el).text() <= 10) {
         if(+$(el).text() === 1) {
-          if(runningBillionaireList.length === 10) { // 2003 & 2001 have 11 in list 
+          if(runningBillionaireList.length === 10 || year + 1 === 2003 && runningBillionaireList.length === 11 || year + 1 === 2001 && runningBillionaireList.length === 11) {
             topBillionairesPerYear[year + 1] = runningBillionaireList;
             runningBillionaireList = [];
           }
@@ -38,7 +38,6 @@ customHeaderRequest.get(listUrl, (error, response, body) => {
       else {
         return;
       }
-      console.log('running list:', runningBillionaireList);
     });
   }
   console.log('billionaires:', topBillionairesPerYear);
